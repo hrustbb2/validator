@@ -1,0 +1,13 @@
+{
+    "name": "hrustbb2/validator",
+    "require": {
+        "respect/validation": "^2.2",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "hrustbb2\\Validator\\": "src/",
+            "Tests\\": "tests/"
+        }
+    }
+}
