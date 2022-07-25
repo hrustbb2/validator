@@ -47,7 +47,7 @@ class ValidatorTest extends TestCase {
         $errors = $validator->getErrors();
         $this->assertEquals('Минимум 3, максимум 4', $errors['name'][0]['two'][0]);
         $cd = $validator->getCleanData();
-        $this->assertNull($cd['name'][0]['two']);
+        $this->assertEquals('sdfs', $cd['name'][0]['first']);
     }
 
     public function test2()

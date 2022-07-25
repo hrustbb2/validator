@@ -321,10 +321,12 @@ class Node {
             // проверяем по правилам
             if(!($r = $node->isValid($val, $key, $this->errors))){
                 $result = false;
+            }else{
+                $this->cleanData[$key] = $val;
             }
             if($r && $node->getType() == self::NOT_FIXED_SIZE){
-                if(isset($node->cleanData[$key])){
-                    unset($node->cleanData[$key]);
+                if(isset($this->cleanData[$key])){
+                    unset($this->cleanData[$key]);
                 }
                 $dataKeys = array_keys($val);
                 while(count($dataKeys) > 0){
@@ -332,10 +334,12 @@ class Node {
                     $v = $val[$dataKey] ?? null;
                     if(is_array($v)){
                         $r = $node->validate($v);
-                        $node->cleanData[$dataKey] = $node->getCleanData();
+                        $this->cleanData[$key][$dataKey] = $node->cleanData;
                         $this->errors[$key][$dataKey] = $node->getErrors();
                     }else{
-                        $r = $node->isValid($v, $dataKey, $this->errors[$key]);
+                        if($r = $node->isValid($v, $dataKey, $this->errors[$key])){
+                            $this->cleanData[$key][$dataKey] = $v;
+                        }
                     }
                     if(! $r){
                         $result = false;
@@ -377,11 +381,6 @@ class Node {
     public function getCleanData()
     {
         $result = $this->cleanData;
-        if(!$result){
-            foreach($this->nested as $key=>$val){
-                $result[$key] = $val->getCleanData();
-            }
-        }
         return $result;
     }
 
