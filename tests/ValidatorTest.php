@@ -74,7 +74,7 @@ class ValidatorTest extends TestCase {
         $d = $validator->getCleanData();
         $this->assertEquals('asd', $d['name'][1]);
         $e = $validator->getErrors();
-        $this->assertEquals([], $e['name'][1]);
+        $this->assertEquals([], $e['name']);
     }
 
     public function test3()
@@ -128,7 +128,7 @@ class ValidatorTest extends TestCase {
         $d = $validator->getCleanData();
         $this->assertEquals('qwe', $d['name'][0]['first'][0]);
         $e = $validator->getErrors();
-        $this->assertEquals([], $e['name'][0]['first'][0]);
+        $this->assertEquals([], $e['name']);
     }
 
 }

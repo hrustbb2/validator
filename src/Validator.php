@@ -16,17 +16,17 @@ class Validator {
 
     public function validate(array $data): bool
     {
-        return $this->node->validate($data);
-    }
-
-    public function getCleanData(): array
-    {
-        return $this->node->getCleanData();
+        return $this->node->validate($data, '*');
     }
 
     public function getErrors(): array
     {
         return $this->node->getErrors();
+    }
+
+    public function getCleanData()
+    {
+        return $this->node->getCleanData();
     }
 
 }
